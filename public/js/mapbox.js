@@ -42,3 +42,15 @@ export const displayMap = (locations) => {
     },
   });
 };
+
+window.addEventListener(
+  'touchmove',
+  function (e) {
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+  },
+  {
+    passive: false,
+  }
+);

@@ -11,8 +11,15 @@ module.exports = class Email {
   }
   newTransport() {
     if (process.env.NODE_ENV === 'production') {
-      //sendgrid
-      return 1;
+      return nodemailer.createTransport({
+        host: 'premium108.web-hosting.com',
+        port: process.env.EMAIL_PORT,
+        secure: true,
+        auth: {
+          user: process.env.EMAIL_PROD_USERNAME,
+          pass: process.env.EMAIL_PROD_PASSWORD,
+        },
+      });
     }
 
     return nodemailer.createTransport({
@@ -37,7 +44,7 @@ module.exports = class Email {
 
     //Define the email options
     const mailOptions = {
-      from: this.from,
+      from: process.env.EMAIL_PROD_USERNAME,
       to: this.to,
       subject: subject,
       html,

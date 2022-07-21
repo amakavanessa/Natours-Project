@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 const validator = require('validator');
 const Tour = require('./tourModel');
+const Booking = require('./bookingModel');
+const AppError = require('../utils/appError');
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -81,6 +83,20 @@ reviewSchema.statics.calcAverageRatings = async function (tourId) {
     });
   }
 };
+
+// restricts users from reviewing  a tour unless it is booked
+reviewSchema.pre('save', async function (next) {
+  const checkBooking = await Booking.findOne({
+    user: this.user,
+    tour: this.tour,
+  });
+  if (!checkBooking)
+    return next(
+      new AppError('You must first purchase this tour to leave a review!', 403)
+    );
+
+  next();
+});
 
 reviewSchema.post('save', function () {
   // this points to current review

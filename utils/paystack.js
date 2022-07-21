@@ -1,13 +1,11 @@
 const axios = require('axios');
-const express = require('express');
-const paystack = require('paystack-node');
 
-exports.initializePayment = async (email, amount) => {
+exports.initializePayment = async (email, amount, callback) => {
   const params = JSON.stringify({
     email: email,
     amount: amount,
     currency: 'NGN',
-    // channels: ['card', 'bank', 'ussd', 'qr', 'mobile_money', 'bank_transfer'],
+    callback_url: callback,
   });
   try {
     const data = await axios.post(
@@ -20,7 +18,6 @@ exports.initializePayment = async (email, amount) => {
         },
       }
     );
-
     return data;
   } catch (err) {
     console.error('error ', err.res);
@@ -28,9 +25,8 @@ exports.initializePayment = async (email, amount) => {
 };
 
 exports.verifyPayment = async (ref) => {
-  console.log(ref);
   try {
-    const res = await axios.get(
+    const verified = await axios.get(
       `https://api.paystack.co/transaction/verify/${ref}`,
       {
         headers: {
@@ -38,8 +34,10 @@ exports.verifyPayment = async (ref) => {
         },
       }
     );
-    console.log(res.data);
+
+    return verified.data.data.customer;
   } catch (err) {
-    console.error('error', err.res);
+    console.error('error', err);
   }
 };
+7;

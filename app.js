@@ -2,11 +2,17 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const csp = require('express-csp');
+// const { helmet, csp } = require('./utils/helmet_csp_config');
+const cors = require('cors');
+const compression = require('compression');
+
+// const expressCsp = require('express-csp');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -27,20 +33,7 @@ app.set('views', path.join(__dirname, 'views'));
 //for serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-//helmet is used to set security http headers
-app.use(helmet());
-
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       defaultSrc: ["'self'", 'https:', 'http:', 'data:', 'ws:'],
-//       baseUri: ["'self'"],
-//       fontSrc: ["'self'", 'https:', 'http:', 'data:'],
-//       scriptSrc: ["'self'", 'https:', 'http:', 'blob:'],
-//       styleSrc: ["'self'", 'https:', 'http:', 'unsafe-inline'],
-//     },
-//   })
-// );
+app.use(cors({ origin: true, credentials: true }));
 //development loggin
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -63,6 +56,74 @@ app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 //Cookie Parser, reading data from the cookie
 app.use(cookieParser());
 
+app.use(helmet());
+
+csp.extend(app, {
+  policy: {
+    directives: {
+      'default-src': ['self'],
+      'style-src': ['self', 'unsafe-inline', 'https:'],
+      'font-src': ['self', 'https://fonts.gstatic.com'],
+      'script-src': [
+        'self',
+        'unsafe-inline',
+        'data',
+        'blob',
+        //'https://js.stripe.com',
+        'https://*.mapbox.com',
+        'https://*.cloudflare.com/',
+        'https://bundle.js:8828',
+        'ws://localhost:56558/',
+      ],
+      'worker-src': [
+        'self',
+        'unsafe-inline',
+        'data:',
+        'blob:',
+        //'https://*.stripe.com',
+        'https://*.mapbox.com',
+        'https://*.cloudflare.com/',
+        'https://bundle.js:*',
+        'ws://localhost:*/',
+      ],
+      'frame-src': [
+        'self',
+        'unsafe-inline',
+        'data:',
+        'blob:',
+        //'https://*.stripe.com',
+        'https://*.mapbox.com',
+        'https://*.cloudflare.com/',
+        'https://bundle.js:*',
+        'ws://localhost:*/',
+      ],
+      'img-src': [
+        'self',
+        'unsafe-inline',
+        'data:',
+        'blob:',
+        //'https://*.stripe.com',
+        'https://*.mapbox.com',
+        'https://*.cloudflare.com/',
+        'https://bundle.js:*',
+        'ws://localhost:*/',
+      ],
+      'connect-src': [
+        'self',
+        'unsafe-inline',
+        'data:',
+        'blob:',
+        // 'wss://<HEROKU-SUBDOMAIN>.herokuapp.com:<PORT>/',
+        //   'https://*.stripe.com',
+        'https://*.mapbox.com',
+        'https://*.cloudflare.com/',
+        'https://bundle.js:*',
+        'ws://localhost:*/',
+      ],
+    },
+  },
+});
+
 //Data sanitization against NoSql injection
 app.use(mongoSanitize());
 
@@ -82,6 +143,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression())
 
 //Test middleware
 app.use((req, res, next) => {

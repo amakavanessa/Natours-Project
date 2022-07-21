@@ -140,6 +140,18 @@ body {
   font-size: 3.5rem;
 }
 
+.heading-secondary--success {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#52a21a),
+    to(#127d3f)
+  );
+  background-image: linear-gradient(to right, #52a21a, #127d3f);
+  font-size: 3.5rem;
+}
+
 .heading-primary,
 .heading-tertirary {
   color: #fff;

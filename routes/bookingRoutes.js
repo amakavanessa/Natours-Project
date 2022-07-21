@@ -4,9 +4,20 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
+router.use(authController.protect);
+router.route('/bookTour/:tourId').get(bookingController.bookInit);
+
+router.use(authController.restrictTo('admin', 'lead-guide'));
+
 router
-  .route('/bookTour/:tourId')
-  .post(authController.protect, bookingController.bookTour);
-// .get(bookingController.verifyPayment);
+  .route('/')
+  .get(bookingController.getAllBookings)
+  .post(bookingController.createBooking);
+
+router
+  .route('/:id')
+  .get(bookingController.getBooking)
+  .patch(bookingController.updateBooking)
+  .delete(bookingController.deleteBooking);
 
 module.exports = router;
