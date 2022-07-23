@@ -16,14 +16,19 @@ router.get('/login', authController.isLoggedIn, viewController.getLoginForm);
 
 router.get('/me', authController.protect, viewController.getAccount);
 router.get('/signup', viewController.getSignupForm);
-router.get(
-  '/verification',
-  authController.protect,
-  bookingController.verify,
-  bookingController.createBookingCheckout
-);
+// router.get(
+//   '/verification',
+//   authController.protect,
+//   bookingController.verify,
+//   bookingController.createBookingCheckout
+// );
 
-router.get('/my-tours', authController.protect, viewController.getMyTours);
+router.get(
+  '/my-tours',
+  bookingController.createBookingCheckout,
+  authController.protect,
+  viewController.getMyTours
+);
 
 router.post(
   '/submit-user-data',

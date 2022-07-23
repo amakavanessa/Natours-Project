@@ -10,7 +10,7 @@ exports.bookInit = catchAsync(async (req, res) => {
   const email = req.user.email;
   const user = req.user.id;
   const amount = tour.price * 100;
-  const callback = `${req.protocol}://${req.get('host')}/verification/?tour=${
+  const callback = `${req.protocol}://${req.get('host')}/my-tours/?tour=${
     req.params.tourId
   }&user=${req.user.id}&price=${tour.price}`;
 
