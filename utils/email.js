@@ -24,11 +24,14 @@ module.exports = class Email {
 
     return nodemailer.createTransport({
       host: 'smtp.mailtrap.io',
-      port: process.env.EMAIL_PORT,
+      port: 2525,
 
       auth: {
         user: process.env.EMAIL_USERNAME,
         pass: process.env.EMAIL_PASSWORD,
+      },
+      tls: {
+        ciphers: 'SSLv3',
       },
     });
   }
@@ -65,24 +68,3 @@ module.exports = class Email {
     );
   }
 };
-// const sendEmail = async (options) => {
-//   //create a transporter
-//   const transporter = nodemailer.createTransport({
-//     host: process.env.EMAIL_HOST,
-//     port: process.env.EMAIL_PORT,
-//     secure: true,
-//     auth: {
-//       user: process.env.EMAIL_USERNAME,
-//       pass: process.env.EMAIL_PASSWORD,
-//     },
-//   });
-//   //Define the email options
-//   const mailOptions = {
-//     from: 'Precious nnam <maksbaby2@gmail.com>',
-//     to: options.email,
-//     subject: options.subject,
-//     text: options.message,
-//   };
-//   //send the email
-//   await transporter.sendMail(mailOptions);
-// };
