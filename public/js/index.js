@@ -14,6 +14,10 @@ const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour');
 
+const navToggle = document.querySelector('.nav-toggle');
+const userSideMenu = document.querySelector('.user-view__menu');
+const userContent = document.querySelector('.user-view__content');
+const mobileSideMenu = document.querySelector('.sideMenu');
 // DELEGATION
 if (mapBox) {
   const locations = JSON.parse(mapBox.dataset.locations);
@@ -77,4 +81,13 @@ if (signupForm)
     signup(name, email, password, confirmPassword);
   });
 
+navToggle.addEventListener('click', function () {
+  userSideMenu.classList.add('sideMenu');
+  userSideMenu.style.display = 'block';
+  userContent.style.display = 'none';
+});
+mobileSideMenu.addEventListener('click', function () {
+  userSideMenu.style.display = 'none';
+  userContent.style.display = 'block';
+});
 //make sure the variable name are same as that in the userModel / the same value api expects

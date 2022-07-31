@@ -8,11 +8,8 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const csp = require('express-csp');
-// const { helmet, csp } = require('./utils/helmet_csp_config');
 const cors = require('cors');
 const compression = require('compression');
-
-// const expressCsp = require('express-csp');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -144,7 +141,7 @@ app.use(
   })
 );
 
-app.use(compression())
+app.use(compression());
 
 //Test middleware
 app.use((req, res, next) => {
