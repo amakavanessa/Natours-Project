@@ -8,8 +8,8 @@
     "dev": "nodemon server.js",
     "start:prod": "nodemon server.js",
     "debug": "ndb server.js",
-    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --public-url /js --out-file bundle.js",
-    "build": "parcel build ./public/js/index.js --out-dir ./public/js --public-url /js --out-file bundle.js"
+    "watch:js": "parcel watch ./public/js/index.js",
+    "build": "parcel build ./public/js/index.js"
   },
   "author": "Precious Nnam",
   "license": "ISC",
