@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 process.on('uncaughtException', (err) => {
-  console.log('UNCAUGHT EXCEPTION : SHUTTING DOWN');
+  console.log('UNCAUGHT EXCEPTION : SHUTTING DOWN' + err);
   process.exit(1);
 });
 
@@ -28,7 +28,7 @@ const server = app.listen(port, () => {
 });
 
 process.on('unhandledRejection', (err) => {
-  console.log('UNHANDLED REJECTION : SHUTTING DOWN');
+  console.log('UNHANDLED REJECTION : SHUTTING DOWN' + err);
   server.close(() => {
     process.exit(1);
   });
