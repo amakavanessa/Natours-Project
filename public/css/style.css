@@ -1,22 +1,34 @@
 :root {
   --section-rotate: 9vw;
   --transition: all 400ms ease;
-  --color-primary: #55c57a;
+  --color-primary: #1d91eb;
+  /*  #55c57a */
+  --color-secondary: #8ac6f5;
+  /* #7dd56f; */
 
-  --color-secondary: #7dd56f;
-  --color-tertiary: #28b487;
-  --color-focus: #2e864b;
+  --color-tertiary: #0080ff;
+  /* #28b487; */
+
+  --color-focus: #2e4b86;
+
+  /* #2e864b */
+
   --webkit-heading-background-img: -webkit-gradient(
     linear,
     left top,
     right bottom,
-    from(rgba(125, 213, 111, 0.85)),
-    to(rgba(40, 180, 135, 0.85))
+
+    /* from(rgba(125, 213, 111, 0.85)),
+    to(rgba(40, 180, 135, 0.85)) */
+      from(rgba(125, 111, 213, 0.85)),
+    to(rgba(40, 135, 180, 0.85))
   );
   --heading-background-img: linear-gradient(
     to bottom right,
-    rgba(125, 213, 111, 0.85),
-    rgba(40, 180, 135, 0.85)
+    /* rgba(125, 213, 111, 0.85),
+    rgba(40, 180, 135, 0.85) */
+      from(rgba(125, 111, 213, 0.85)),
+    to(rgba(40, 135, 180, 0.85))
   );
 }
 
@@ -211,13 +223,13 @@ body {
 .btn:visited {
   font-size: 1.6rem;
   padding: 1.4rem 3rem;
-  border-radius: 10rem;
+  border-radius: 0.8rem;
   text-transform: uppercase;
   display: inline-block;
   text-decoration: none;
   position: relative;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
   font-weight: 400;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -273,11 +285,11 @@ body {
   color: #fff;
   font-size: 1.4rem;
   padding: 1.25rem 3rem;
-  border-radius: 10rem;
+  border-radius: 2rem;
   text-transform: uppercase;
   position: relative;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
   cursor: pointer;
   text-decoration: none;
   font-weight: 400;
@@ -295,8 +307,8 @@ body {
   text-decoration: none;
   border-bottom: 1px solid var(--color-primary);
   padding: 3px;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 
 .btn-text:hover {
@@ -898,8 +910,8 @@ header {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
   font-weight: 400;
   background: none;
   border: none;
@@ -928,8 +940,8 @@ header {
   padding: 1rem 3rem;
   border-radius: 10rem;
   border: 1px solid currentColor !important;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 .nav__el--cta:hover {
   background-color: #f7f7f7;
@@ -976,8 +988,8 @@ header {
   padding-bottom: 3px;
   border-bottom: 1px solid #999;
   width: 18rem;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 .nav__search-input::-webkit-input-placeholder {
   color: #999;
@@ -1009,8 +1021,8 @@ header {
 .side-nav li {
   margin: 1rem 0;
   border-left: 0 solid #fff;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 .side-nav--active,
 .side-nav li:hover {
@@ -1034,8 +1046,8 @@ header {
   text-transform: uppercase;
   font-weight: 400;
   text-decoration: none;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 .side-nav a:hover,
 .side-nav a:active {
@@ -1073,8 +1085,8 @@ header {
   -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  -webkit-transition: 0.3s all;
-  transition: 0.3s all;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   display: -webkit-box;
@@ -1237,8 +1249,8 @@ header {
   background-color: #f2f2f2;
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
-  -webkit-transition: all 0.3s;
-  transition: all 0.3s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
   border-radius: 4px;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -1304,8 +1316,8 @@ header {
   text-decoration: none;
   border-bottom: 1px solid var(--color-primary);
   padding: 3px;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
   cursor: pointer;
 }
 .form__upload + label:hover {
@@ -1372,8 +1384,8 @@ header {
 .footer__nav a {
   color: #777;
   text-decoration: none !important;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  -webkit-transition: var(--transition);
+  transition: var(--transition);
 }
 .footer__nav a:hover,
 .footer__nav a:active {
