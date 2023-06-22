@@ -9,6 +9,9 @@ mixin navItem(link, text, icon, active)
 block content
     main.main
         .user-view
+            .nav-toggle 
+                svg.nav-icon
+                    use(xlink:href='/img/icons.svg#icon-menu')
             nav.user-view__menu
                 ul.side-nav
                     +navItem('#', 'Settings', 'settings', true)
@@ -27,7 +30,7 @@ block content
 
             .user-view__content
                 .user-view__form-container
-                    .nav-toggle #
+                  
                     h2.heading-secondary.ma-bt-md Your account settings
                     //-WITHOUT API
                     //- form.form.form-user-data(action='/submit-user-data' method='POST')

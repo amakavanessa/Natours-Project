@@ -82,12 +82,14 @@ if (signupForm)
   });
 
 navToggle.addEventListener('click', function () {
-  userSideMenu.classList.add('sideMenu');
-  userSideMenu.style.display = 'block';
-  userContent.style.display = 'none';
+  if (userSideMenu.style.display === 'none') {
+    userSideMenu.style.display = 'block';
+  } else {
+    userSideMenu.style.display = 'none';
+  }
 });
-mobileSideMenu.addEventListener('click', function () {
-  userSideMenu.style.display = 'none';
-  userContent.style.display = 'block';
-});
+// mobileSideMenu.addEventListener('click', function () {
+//   userSideMenu.style.display = 'none';
+//   userContent.style.display = 'block';
+// });
 //make sure the variable name are same as that in the userModel / the same value api expects
