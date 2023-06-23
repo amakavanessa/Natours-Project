@@ -3,3 +3,4 @@ dev-data
 .prettierrc
 config.env
 .cache
+package-lock.json
